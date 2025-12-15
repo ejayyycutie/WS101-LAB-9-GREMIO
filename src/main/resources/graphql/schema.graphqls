@@ -1,0 +1,43 @@
+# 1. Product Entity
+type Product {
+    id: ID
+    name: String
+    price: Float
+}
+
+# 2. Customer Entity
+type Customer {
+    id: ID
+    name: String
+    email: String
+    invoices: [Invoice]
+}
+
+# 3. Invoice Entity
+type Invoice {
+    id: ID
+    totalAmount: Float
+    customer: Customer
+    products: [Product]
+}
+
+# 4. Queries
+type Query {
+    getAllProducts: [Product]
+    getProductById(id: ID): Product
+    getAllCustomers: [Customer]
+}
+
+# 5. Mutations
+type Mutation {
+    # Product
+    createProduct(name: String, price: Float): Product
+    updateProduct(id: ID, name: String, price: Float): Product
+    deleteProduct(id: ID): Boolean
+
+    # Customer
+    createCustomer(name: String!, email: String!): Customer
+
+    # Invoice (ITO ANG HINAHANAP NG ERROR MO)
+    createInvoice(customerId: ID!, productIds: [ID]!): Invoice
+}
